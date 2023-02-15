@@ -83,9 +83,8 @@ export async function buildEmbed(message: DiscordMessage): Promise<void> {
       };
       embed.footer.text = e.src.data.desc;
       logger.log(e.src.data.desc);
-      message.embeds.push(embed);
       updateMessage(message);
-      return Promise.resolve();
+      //return Promise.resolve();
     })
     .catch((e) => {
       logger.error(e);
@@ -98,7 +97,7 @@ export async function buildEmbed(message: DiscordMessage): Promise<void> {
 */
   // Convert discords existing embeds to sendable ones. Prevents existing embeds from breaking
   //message.embeds = message.embeds.map((embed: rawDiscordEmbed) => cleanupEmbed(embed));
-  /*message.embeds.push(embed);
+  message.embeds.push(embed);
   updateMessage(message);
-  return Promise.resolve();*/
+  return Promise.resolve();
 }
