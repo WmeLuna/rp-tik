@@ -7,7 +7,7 @@
     "discordID": "865632950443835392",
     "github": "WmeLuna"
   },
-  "version": "1.0.0",
+  "version": "1.0.1",
   "updater": {
     "type": "github",
     "id": "WmeLuna/rp-tik"

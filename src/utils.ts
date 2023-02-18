@@ -84,7 +84,7 @@ export function updateMessage(message: unknown): void {
 
 export function removeEmbed(message: DiscordMessage): void {
   for (let embed in message.embeds) {
-    if (!message.embeds[embed]?.footer?.text.includes("TikTok")) {
+    if (message.embeds[embed]?.provider?.name?.includes("TikTok")) {
       message.embeds.splice(embed, 1);
     }
   }

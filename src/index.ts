@@ -1,7 +1,7 @@
-import { title } from "process";
-import { Injector, Logger, webpack } from "replugged";
+/* eslint-disable @typescript-eslint/naming-convention */
+import { Injector, Logger } from "replugged";
 //import fetch from "node-fetch";
-import { cleanupEmbed, removeEmbed, updateMessage } from "./utils";
+import { removeEmbed, updateMessage } from "./utils";
 const inject = new Injector();
 const logger = Logger.plugin("RP-Tik");
 
@@ -31,36 +31,44 @@ export function stop(): void {
 }
 export async function buildEmbed(message: DiscordMessage): Promise<void> {
   if (message.embeds.length == 1) {
-    logger.log(message.embeds[0].color);
-    if (message.embeds[0]?.title.includes("RP-Tik")) {
-      return Promise.resolve();
-    } else {
+    if (message.embeds[0]?.provider?.name?.includes("TikTok")) {
       removeEmbed(message);
+    } else {
+      return Promise.resolve();
     }
   }
 
   let embed = {
-    type: "video",
-    title: "RP-Tik",
-    color: "0x8334eb",
-    description: "RP-Tik",
-    thumbnail: {
+    type: "rich",
+    provider: {
+      name: "RP-Tik",
+    },
+    color: "0x383838",
+    description: "Loading...",
+    thumbnail: {},
+    video: {},
+    author: {
+      name: null,
+      icon_url: null,
+      proxy_icon_url: null,
+    },
+    /*thumbnail: {
       url: "",
       proxy_url: "",
-      height: 0,
+      height: 200,
       width: 200,
     },
     video: {
       url: "",
       proxy_url: "",
-      height: 0,
+      height: 200,
       width: 200,
-    },
+    },*/
 
     // @ts-expect-error its not fucking null
     url: message.content.match(TT_DETECTION)[0],
     footer: {
-      text: "RP-Tik",
+      text: null,
     },
   }; // @ts-expect-error its not fucking null
   let api = new URL(message.content.match(TT_DETECTION)[0]);
@@ -75,6 +83,11 @@ export async function buildEmbed(message: DiscordMessage): Promise<void> {
         height: e.video.height,
         width: e.video.width,
       };
+      embed.author = {
+        name: e.author.username,
+        icon_url: e.src.data.author.avatar_thumb.url_list[0],
+        proxy_icon_url: e.src.data.author.avatar_thumb.url_list[0],
+      };
       embed.video = {
         url: e.video.url,
         proxy_url: e.video.url,
@@ -82,6 +95,8 @@ export async function buildEmbed(message: DiscordMessage): Promise<void> {
         width: e.video.width,
       };
       embed.footer.text = e.src.data.desc;
+      embed.type = "video";
+      embed.color = "0x8334eb";
       logger.log(e.src.data.desc);
       updateMessage(message);
       //return Promise.resolve();
