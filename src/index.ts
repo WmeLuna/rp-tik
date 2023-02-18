@@ -19,7 +19,7 @@ export async function start(): Promise<void> {
 
 async function receiver(message: DiscordMessage): Promise<void> {
   // if a stored password leads to the decrypted string, skip the modal
-  logger.log(message);
+  //logger.log(message);
   await buildEmbed(message);
   /*await iteratePasswords(message).then((res: string | false) => {
     if (res) return void buildEmbed(message, res);
@@ -76,7 +76,7 @@ export async function buildEmbed(message: DiscordMessage): Promise<void> {
   fetch(api)
     .then((e) => e.json())
     .then((e) => {
-      logger.log(e);
+      //logger.log(e);
       embed.thumbnail = {
         url: e.src.data.video.dynamic_cover.url_list[0],
         proxy_url: e.src.data.video.dynamic_cover.url_list[0],
@@ -97,7 +97,7 @@ export async function buildEmbed(message: DiscordMessage): Promise<void> {
       embed.footer.text = e.src.data.desc;
       embed.type = "video";
       embed.color = "0x8334eb";
-      logger.log(e.src.data.desc);
+      //logger.log(e.src.data.desc);
       updateMessage(message);
       //return Promise.resolve();
     })
