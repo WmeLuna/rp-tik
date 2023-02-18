@@ -78,6 +78,10 @@ export async function buildEmbed(message: DiscordMessage): Promise<void> {
         width: e.video.width,
       };
       embed.footer.text = e.src.data.desc;
+      if (e.imagePost) {
+        // @ts-expect-error its string
+        embed.footer.text = `⚠️ Slide Shows are not fully implemented!\n${String(e.src.data.desc)}`;
+      }
       embed.type = "video";
       embed.color = "0x8334eb";
       //logger.log(e.src.data.desc);
