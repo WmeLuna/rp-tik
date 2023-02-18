@@ -7,7 +7,7 @@ const patches: types.PlaintextPatch[] = [
         // Message Indicator
         match: /var .,.,.=(.)\.className,.=.\.message,.=.\.children,.=.\.content,.=.\.onUpdate/,
         replace:
-          "try {if($1?.message.content.match(window.rptik?.TT_DETECTION)){window.rptik?.receiver($1?.message)}} catch (e) {};$&",
+          "try {console.log($1);if($1?.message.content.match(window.rptik?.TT_DETECTION)){window.rptik?.receiver($1?.message)}} catch (e) {};$&",
       },
     ],
   },

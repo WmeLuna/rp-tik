@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/require-await */
 import { Injector, Logger } from "replugged";
-//import fetch from "node-fetch";
 import { removeEmbed, updateMessage } from "./utils";
 const inject = new Injector();
 const logger = Logger.plugin("RP-Tik");
 
 const TT_DETECTION = new RegExp(
-  /\bhttps?:\/\/(?:m|www|vm)\.tiktok\.com\/(?:.*\/)?(?:(?:v|embed|video|t)\/|\?shareId=|\&item_id=)?(\d+|\w+)\b/gm,
+  /\bhttps?:\/\/(?:m|www|vm)\.tiktok\.com\/(?:.*\/)?(?:(?:v|embed|video|t)\/|\?shareId=|&item_id=)?(\d+|\w+)\b/gm,
 );
 
 export async function start(): Promise<void> {
@@ -18,13 +18,8 @@ export async function start(): Promise<void> {
 }
 
 async function receiver(message: DiscordMessage): Promise<void> {
-  // if a stored password leads to the decrypted string, skip the modal
   //logger.log(message);
   await buildEmbed(message);
-  /*await iteratePasswords(message).then((res: string | false) => {
-    if (res) return void buildEmbed(message, res);
-    return void buildDecModal({ message });
-  });*/
 }
 export function stop(): void {
   inject.uninjectAll();
@@ -52,18 +47,6 @@ export async function buildEmbed(message: DiscordMessage): Promise<void> {
       icon_url: null,
       proxy_icon_url: null,
     },
-    /*thumbnail: {
-      url: "",
-      proxy_url: "",
-      height: 200,
-      width: 200,
-    },
-    video: {
-      url: "",
-      proxy_url: "",
-      height: 200,
-      width: 200,
-    },*/
 
     // @ts-expect-error its not fucking null
     url: message.content.match(TT_DETECTION)[0],
@@ -104,14 +87,7 @@ export async function buildEmbed(message: DiscordMessage): Promise<void> {
     .catch((e) => {
       logger.error(e);
     });
-  /*embed.thumbnail.url = `https://tiktxk.com/meta/${req.data.id}/image`;
-  embed.thumbnail.proxyURL = `https://tiktxk.com/meta/${req.data.id}/image`;
 
-  embed.video.url = `https://tiktxk.com/meta/${req.data.id}/video`;
-  embed.video.proxyURL = `https://tiktxk.com/meta/${req.data.id}/video`;
-*/
-  // Convert discords existing embeds to sendable ones. Prevents existing embeds from breaking
-  //message.embeds = message.embeds.map((embed: rawDiscordEmbed) => cleanupEmbed(embed));
   message.embeds.push(embed);
   updateMessage(message);
   return Promise.resolve();

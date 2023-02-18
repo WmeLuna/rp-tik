@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable no-undefined */
 
-import { common, settings } from "replugged";
+import { common } from "replugged";
 
 export function cleanupEmbed(embed: rawDiscordEmbed): DiscordEmbed {
   /* backported code from MLV2 rewrite */
