@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/require-await */
 import { Injector, Logger } from "replugged";
 import { removeEmbed, updateMessage } from "./utils";
+import { provider } from "./assets/provider";
 const inject = new Injector();
 const logger = Logger.plugin("RP-Tik");
 
@@ -26,7 +27,7 @@ export function stop(): void {
 }
 export async function buildEmbed(message: DiscordMessage): Promise<void> {
   if (message.embeds.length == 1) {
-    if (message.embeds[0]?.provider?.name?.includes("TikTok")) {
+    if (message.embeds[0]?.provider?.name?.includes?.("TikTok")) {
       removeEmbed(message);
     } else {
       return Promise.resolve();
@@ -36,7 +37,7 @@ export async function buildEmbed(message: DiscordMessage): Promise<void> {
   let embed = {
     type: "rich",
     provider: {
-      name: "RP-Tik",
+      name: provider(),
     },
     color: "0x383838",
     description: "Loading...",
@@ -90,6 +91,8 @@ export async function buildEmbed(message: DiscordMessage): Promise<void> {
     })
     .catch((e) => {
       logger.error(e);
+      embed.description = `Error!`;
+      updateMessage(message);
     });
 
   message.embeds.push(embed);
