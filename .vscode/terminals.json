@@ -1,0 +1,12 @@
+{
+  "autorun": true,
+  "recycle": true,
+  "terminals": [
+    {
+      "name": "Build & Watch",
+      "focus": true,
+      "command": "pnpm run watch",
+      "execute": false
+    }
+  ]
+}
