@@ -3,6 +3,7 @@
 import { Injector, Logger } from "replugged";
 import { removeEmbed, updateMessage } from "./utils";
 import { provider } from "./assets/provider";
+import { footer } from "./assets/footer";
 const inject = new Injector();
 const logger = Logger.plugin("RP-Tik");
 
@@ -80,8 +81,10 @@ export async function buildEmbed(message: DiscordMessage): Promise<void> {
       };
       embed.footer.text = e.src.data.desc;
       if (e.imagePost) {
+        embed.thumbnail = {};
+        embed.video = {};
         // @ts-expect-error its string
-        embed.footer.text = `⚠️ Slide Shows are not fully implemented!\n${String(e.src.data.desc)}`;
+        embed.footer.text = footer(e);
       }
       embed.type = "video";
       embed.color = "0x8334eb";
