@@ -35,10 +35,10 @@ function Description(props: any) {
   const tagsGone = cfg.get("hideTags");
   const { data } = props;
   if (tagsGone) {
-    data.src.data.desc = data.src.data.original_client_text.markup_text.replaceAll(
-      /<h id="\d+">#\w+<\/h>/gm,
-      "",
-    );
+    data.src.data.desc = data.src.data.original_client_text.markup_text
+      .replaceAll(/<h id="\d+">#\w+<\/h>/gm, "")
+      .replaceAll(/<rc>.+<\/rc>/gm, "")
+      .replaceAll(/<m.+<\/m>/gm, "");
   }
   return (
     <>

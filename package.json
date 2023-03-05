@@ -1,6 +1,6 @@
 {
   "name": "RP-Tik",
-  "version": "1.0.5",
+  "version": "1.0.5-1",
   "description": "A tiktok embeder",
   "engines": {
     "node": ">=14.0.0"
