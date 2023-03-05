@@ -1,10 +1,10 @@
-span[class^=embedFooterText] .images img {
+span[class^="embedFooterText"] .images img {
   max-width: 50%;
 }
-span[class^=embedFooterText] .images {
+span[class^="embedFooterText"] .images {
   margin-bottom: 8px;
 }
-span[class^=embedFooterText] .stats {
+span[class^="embedFooterText"] .stats {
   display: flex;
   justify-content: space-around;
   position: relative;
