@@ -4,6 +4,8 @@ import { Injector, Logger } from "replugged";
 import { removeEmbed, updateMessage } from "./utils";
 import { provider } from "./assets/provider";
 import { footer } from "./assets/footer";
+import { author } from "./assets/author";
+
 const inject = new Injector();
 const logger = Logger.plugin("RP-Tik");
 
@@ -48,13 +50,11 @@ export async function buildEmbed(message: DiscordMessage): Promise<void> {
       icon_url: null,
       proxy_icon_url: null,
     },
-
-    // @ts-expect-error its not fucking null
     url: message.content.match(TT_DETECTION)[0],
     footer: {
       text: null,
     },
-  }; // @ts-expect-error its not fucking null
+  };
   let api = new URL(message.content.match(TT_DETECTION)[0]);
   api.hostname = "tiktxk.wmeluna.workers.dev";
   fetch(api)
@@ -67,7 +67,7 @@ export async function buildEmbed(message: DiscordMessage): Promise<void> {
         width: e.video.width,
       };
       embed.author = {
-        name: e.author.username,
+        name: author(e),
         icon_url: e.src.data.author.avatar_thumb.url_list[0],
         proxy_icon_url: e.src.data.author.avatar_thumb.url_list[0],
       };
@@ -77,12 +77,10 @@ export async function buildEmbed(message: DiscordMessage): Promise<void> {
         height: e.video.height,
         width: e.video.width,
       };
-      // @ts-expect-error its string
       embed.footer.text = footer(e);
       if (e.imagePost) {
         embed.thumbnail = {};
         embed.video = {};
-        // @ts-expect-error its string
         embed.footer.text = footer(e);
       }
       embed.type = "video";

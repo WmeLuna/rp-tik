@@ -1,3 +1,6 @@
+span[class^="embedFooterText"] {
+  width: 100%;
+}
 span[class^="embedFooterText"] .images img {
   max-width: 50%;
 }
@@ -10,4 +13,11 @@ span[class^="embedFooterText"] .stats {
   position: relative;
   top: -5px;
   font-weight: bold;
+}
+
+.tik-author {
+  line-height: 15px;
+}
+.tik-author span {
+  display: block;
 }

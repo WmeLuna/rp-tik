@@ -1,7 +1,7 @@
 {
-  "name": "plugin-template",
-  "version": "1.0.0",
-  "description": "A plugin template",
+  "name": "RP-Tik",
+  "version": "1.0.4",
+  "description": "A tiktok embeder",
   "engines": {
     "node": ">=14.0.0"
   },
