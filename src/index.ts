@@ -20,7 +20,6 @@ export async function start(): Promise<void> {
 }
 
 async function receiver(message: DiscordMessage): Promise<void> {
-  //logger.log(message);
   await buildEmbed(message);
 }
 export function stop(): void {
@@ -61,7 +60,6 @@ export async function buildEmbed(message: DiscordMessage): Promise<void> {
   fetch(api)
     .then((e) => e.json())
     .then((e) => {
-      //logger.log(e);
       embed.thumbnail = {
         url: e.src.data.video.dynamic_cover.url_list[0],
         proxy_url: e.src.data.video.dynamic_cover.url_list[0],
@@ -79,7 +77,8 @@ export async function buildEmbed(message: DiscordMessage): Promise<void> {
         height: e.video.height,
         width: e.video.width,
       };
-      embed.footer.text = e.src.data.desc;
+      // @ts-expect-error its string
+      embed.footer.text = footer(e);
       if (e.imagePost) {
         embed.thumbnail = {};
         embed.video = {};
@@ -88,9 +87,7 @@ export async function buildEmbed(message: DiscordMessage): Promise<void> {
       }
       embed.type = "video";
       embed.color = "0x8334eb";
-      //logger.log(e.src.data.desc);
       updateMessage(message);
-      //return Promise.resolve();
     })
     .catch((e) => {
       logger.error(e);

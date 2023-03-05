@@ -1,0 +1,15 @@
+span[class^="embedFooterText"] {
+  .images img {
+    max-width: 50%;
+  }
+  .images {
+    margin-bottom: 8px;
+  }
+  .stats {
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    top: -5px;
+    font-weight: bold;
+  }
+}
