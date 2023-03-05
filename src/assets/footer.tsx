@@ -1,12 +1,11 @@
+import { cfg } from "..";
 import { common } from "replugged";
 const { React } = common;
 import "./slideshow.css";
 
 function Slideshow(props: any) {
   const imageList = props.images;
-  console.log(imageList);
   const images = imageList.map((image: any) => <img src={image.url}></img>);
-  console.log(images);
   return images;
 }
 function intToString(num: number) {
@@ -33,7 +32,14 @@ function intToString(num: number) {
 }
 
 function Description(props: any) {
+  const tagsGone = cfg.get("hideTags");
   const { data } = props;
+  if (tagsGone) {
+    data.src.data.desc = data.src.data.original_client_text.markup_text.replaceAll(
+      /<h id="\d+">#\w+<\/h>/gm,
+      "",
+    );
+  }
   return (
     <>
       <div className="stats">

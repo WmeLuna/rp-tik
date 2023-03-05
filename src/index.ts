@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/require-await */
-import { Injector, Logger } from "replugged";
+import { Injector, Logger, settings } from "replugged";
 import { removeEmbed, updateMessage } from "./utils";
 import { provider } from "./assets/provider";
 import { footer } from "./assets/footer";
@@ -8,6 +8,21 @@ import { author } from "./assets/author";
 
 const inject = new Injector();
 const logger = Logger.plugin("RP-Tik");
+
+interface Settings {
+  hideTags?: boolean;
+}
+
+const defaultSettings: Partial<Settings> = {
+  hideTags: false,
+};
+
+export { Settings } from "./Settings";
+
+export const cfg = await settings.init<Settings, keyof typeof defaultSettings>(
+  "com.wmeluna.RP-Tik",
+  defaultSettings,
+);
 
 const TT_DETECTION = new RegExp(
   /\bhttps?:\/\/(?:m|www|vm)\.tiktok\.com\/(?:.*\/)?(?:(?:v|embed|video|t)\/|\?shareId=|&item_id=)?(\d+|\w+)\b/gm,
