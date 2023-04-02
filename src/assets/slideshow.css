@@ -14,6 +14,17 @@ span[class^="embedFooterText"] .stats {
   top: -5px;
   font-weight: bold;
 }
+span[class^="embedFooterText"] .RP-Tik-Sound {
+  justify-content: flex-end;
+}
+span[class^="embedFooterText"] .RP-Tik-Sound span {
+  text-align: right;
+  margin-right: 8px;
+  font-size: 100%;
+}
+span[class^="embedFooterText"] .RP-Tik-Sound img {
+  margin-right: 0;
+}
 
 .tik-author {
   line-height: 15px;

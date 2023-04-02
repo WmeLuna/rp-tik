@@ -13,6 +13,17 @@ span[class^="embedFooterText"] {
     top: -5px;
     font-weight: bold;
   }
+  .RP-Tik-Sound {
+    justify-content: flex-end;
+    span {
+      text-align: right;
+      margin-right: 8px;
+      font-size: 100%;
+    }
+    img {
+      margin-right: 0;
+    }
+  }
 }
 .tik-author {
   line-height: 15px;

@@ -2,6 +2,7 @@ import { cfg } from "..";
 import { common } from "replugged";
 const { React } = common;
 import "./slideshow.css";
+import { SoundInfo } from "./sound";
 
 function Slideshow(props: any) {
   const imageList = props.images;
@@ -47,6 +48,7 @@ function Description(props: any) {
         <span className="comments">💬{intToString(data.statistics.comments)}</span>
       </div>
       <span>{data.src.data.desc}</span>
+      <SoundInfo data={data.src.data.music}></SoundInfo>
     </>
   );
 }
