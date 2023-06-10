@@ -1,12 +1,19 @@
 import { cfg } from "..";
-import { common } from "replugged";
+import { common, components, webpack } from "replugged";
 const { React } = common;
+const { ErrorBoundary } = components;
 import "./slideshow.css";
 import { SoundInfo } from "./sound";
-
+const DiscordImage = (
+  await webpack.waitForModule<Record<string, (props?: ImageProps) => JSX.Element>>(
+    webpack.filters.bySource("().imagePlaceholderOverlay"),
+  )
+).Z;
 function Slideshow(props: any) {
   const imageList = props.images;
-  const images = imageList.map((image: any) => <img src={image.url}></img>);
+  const images = imageList.map((image: any) => (
+    <DiscordImage src={image.url} useFullWidth={true} width={200}></DiscordImage>
+  ));
   return images;
 }
 function intToString(num: number) {
@@ -56,12 +63,12 @@ function Description(props: any) {
 export function footer(e: any) {
   if (e.imagePost) {
     return (
-      <>
+      <ErrorBoundary>
         <div className="images">
           <Slideshow images={e.imagePost.images}></Slideshow>
         </div>
         <Description data={e}></Description>
-      </>
+      </ErrorBoundary>
     );
   }
   return (

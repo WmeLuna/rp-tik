@@ -93,3 +93,27 @@ interface DiscordMessage {
   content: string;
   embeds: Arrays<DiscordEmbed>;
 }
+
+interface ImageProps {
+  alt?: string;
+  className?: string;
+  height?: number;
+  imageClassName?: string;
+  limitResponsiveWidth?: unknown;
+  mediaLayoutType?: "MOSAIC" | "STATIC";
+  minHeight?: number;
+  minWidth?: number;
+  original?: string;
+  src?: string;
+  readyState?: "ERROR" | "LOADING" | "READY";
+  renderItem?: unknown;
+  tabIndex?: number;
+  useFullWidth?: boolean;
+  width?: number;
+  zoomable?: boolean;
+  onBlur?(e: React.FocusEvent): void;
+  onClick?(e: React.MouseEvent): void;
+  onContextMenu?(e: React.MouseEvent): void;
+  onFocus?(e: React.FocusEvent): void;
+  onMouseEnter?(e: React.MouseEvent): void;
+}

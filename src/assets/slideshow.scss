@@ -1,7 +1,7 @@
 span[class^="embedFooterText"] {
   width: 100%;
-  .images img {
-    max-width: 50%;
+  .images div {
+    display: inline-block;
   }
   .images {
     margin-bottom: 8px;
